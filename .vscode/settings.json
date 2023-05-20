@@ -1,0 +1,6 @@
+{
+    // 实现代码保存时，eslint执行fix动作
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+}
