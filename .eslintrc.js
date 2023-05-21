@@ -33,6 +33,8 @@ module.exports = {
 
         quotes: ['error', 'single'],
 
+        'no-unused-vars': 0,
+
         'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'], // 禁止空格和tab的混合缩进
 
         'no-debugger': 2, //禁止有debugger
