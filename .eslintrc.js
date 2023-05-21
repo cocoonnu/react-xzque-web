@@ -31,13 +31,13 @@ module.exports = {
     rules: {
         indent: ['error', 4], // 缩进
 
-        quotes: ['error', 'single'],
+        quotes: ['error', 'single'], // 使用单引号
 
         'no-unused-vars': 0,
 
         'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'], // 禁止空格和tab的混合缩进
 
-        'no-debugger': 2, //禁止有debugger
+        // 'no-debugger': 2, //禁止有debugger
 
         'space-infix-ops': 2, // 要求操作符周围有空格
 
@@ -46,5 +46,8 @@ module.exports = {
         'import/first': 0, // 消除绝对路径必须要在相对路径前引入的问题
 
         'semi': ['error', 'never'], // 不允许加分号
+
+        // TS 报错忽略
+        '@typescript-eslint/no-var-requires': 0 // 允许使用requires
     },
 }

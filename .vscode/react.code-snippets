@@ -1,0 +1,36 @@
+{
+    "ifce": {
+        "prefix": "ifce",
+        "body": [
+            "import React, { FC } from 'react'",
+            "",
+            "const : FC = () => {",
+            "    return (",
+            "        <div >",
+            "        </div>",
+            "    )",
+            "}",
+            "",
+            "export default "
+        ],
+        "description": "ifce"
+    },
+
+    "class": {
+        "prefix": "class",
+        "body": [
+            "className={  }"
+        ],
+        "description": "class"
+    },
+    
+    "conf": {
+        "prefix": "conf",
+        "body": [
+            "const  = () => {",
+            "",
+            "}"
+        ],
+        "description": "conf"
+    }    
+}
