@@ -47,6 +47,8 @@ module.exports = {
 
         'semi': ['error', 'never'], // 不允许加分号
 
+        'jsx-quotes': ['error', 'prefer-single'], // jsx 只能使用单引号
+
         // TS 报错忽略
         '@typescript-eslint/no-var-requires': 0 // 允许使用requires
     },

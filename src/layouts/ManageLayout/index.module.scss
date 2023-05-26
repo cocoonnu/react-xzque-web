@@ -1,0 +1,23 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .container-content {
+        width: 1200px;
+        display: flex;
+        margin-top: 20px;
+
+        button {
+            border-radius: 0;
+        }
+
+        .top-option {
+            margin-bottom: 40px;
+        }
+
+        .right-list {
+            margin-left: 60px;
+        }
+    }
+}

@@ -4,14 +4,14 @@
         "body": [
             "import React, { FC } from 'react'",
             "",
-            "const : FC = () => {",
+            "const $1: FC = () => {",
             "    return (",
             "        <div >",
             "        </div>",
             "    )",
             "}",
             "",
-            "export default "
+            "export default $1"
         ],
         "description": "ifce"
     },
@@ -19,7 +19,7 @@
     "class": {
         "prefix": "class",
         "body": [
-            "className={  }"
+            "className={ styles$1 }"
         ],
         "description": "class"
     },
@@ -27,10 +27,18 @@
     "conf": {
         "prefix": "conf",
         "body": [
-            "const  = () => {",
+            "const $1 = () => {",
             "",
             "}"
         ],
         "description": "conf"
+    },
+    
+    "onc": {
+        "prefix": "onc",
+        "body": [
+            "onClick={() => $1}"
+        ],
+        "description": "onc"
     }    
 }

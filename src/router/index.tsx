@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 import MainLayout from '@/layouts/MainLayout'
 import Home from '@/views/Home'
 import Login from '@/views/Login'
@@ -24,16 +24,16 @@ export default createBrowserRouter([
                 element: <Home />
             },
             {
-                path: 'login',
+                path: '/login',
                 element: <Login />
             },
             {
-                path: 'register',
+                path: '/register',
                 element: <Register />
             },
 
             {
-                path: 'manage',
+                path: '/manage',
                 element: <ManageLayout />,
 
                 children: [
@@ -49,6 +49,11 @@ export default createBrowserRouter([
                         path: 'trash',
                         element: <Trash />,
                     },
+                    // 重定向
+                    {
+                        path: '/manage',
+                        element: <Navigate to='list' />,
+                    }  
                 ],
             },
 

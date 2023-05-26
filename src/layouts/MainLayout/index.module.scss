@@ -1,0 +1,22 @@
+.layout {
+    width: 100vw;
+    min-width: 1300px;
+
+    .header {
+        height: 65px;
+        padding: 0 24px;
+    }
+    
+    .main {
+        width: 100%;
+        background-color: #EEF0F4;
+        min-height: calc(100vh - 65px - 65px);
+    }
+    
+    .footer {
+        height: 65px;
+        text-align: center;
+        background-color: #F6F6F6;
+        border-top: 1px solid #E8E8E8;
+    }
+}

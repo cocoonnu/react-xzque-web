@@ -4,7 +4,7 @@ import router from './router'
 
 const App: FC = () => {
 
-    return <RouterProvider router={router}></RouterProvider>
+    return <RouterProvider router={ router }></RouterProvider>
 }
 
 export default App
