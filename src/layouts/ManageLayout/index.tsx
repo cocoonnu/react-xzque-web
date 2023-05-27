@@ -18,8 +18,8 @@ const ManageLayout: FC = () => {
                         size='large'
                         type='primary'
                         icon={<PlusOutlined />}
-                        className={ styles['top-option'] }
                         onClick={() => { nav('/question') }}
+                        style={{ marginBottom: '40px'}}
                     >
                         新建问卷
                     </Button>
