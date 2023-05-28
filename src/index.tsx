@@ -6,9 +6,15 @@ import './index.css'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 
+const antdTheme = {
+    token: {
+        borderRadius: 3,
+    }
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
-    <ConfigProvider locale={zhCN}>
+    <ConfigProvider locale={zhCN} theme={antdTheme}>
         <App />
     </ConfigProvider>
 )

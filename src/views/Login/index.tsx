@@ -1,10 +1,9 @@
 import React, { FC } from 'react'
 
 const Login: FC = () => {
+
     return (
-        <div className='Login'>
-            login
-        </div>
+        <div>111</div>
     )
 }
 

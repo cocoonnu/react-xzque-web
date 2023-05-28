@@ -18,6 +18,9 @@ const Home: FC = () => {
                 <Button type='primary' onClick={() => { nav('/manage') }}>
                     开始使用
                 </Button>
+                {/* <Button type='primary' onClick={() => { nav('/login') }}>
+                    开始使用
+                </Button> */}
                 
             </div>
         </div>
