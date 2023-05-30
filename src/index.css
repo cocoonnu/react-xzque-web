@@ -32,13 +32,11 @@ img {
     vertical-align: middle;
 }
 
-a {
+/* a {
     color: #666;
     text-decoration: none;
-
-    /* 去除在移动端下a标签点击的蓝色背景 */
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-}
+} */
 
 input {
     border: 0;

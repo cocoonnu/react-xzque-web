@@ -15,12 +15,12 @@ const Home: FC = () => {
 
                 <Paragraph>已累计创建问卷 100 份，发布问卷 90 份，收到答卷 980 份</Paragraph>
 
-                <Button type='primary' onClick={() => { nav('/manage') }}>
-                    开始使用
-                </Button>
-                {/* <Button type='primary' onClick={() => { nav('/login') }}>
+                {/* <Button type='primary' onClick={() => { nav('/manage') }}>
                     开始使用
                 </Button> */}
+                <Button type='primary' onClick={() => { nav('/login') }}>
+                    开始使用
+                </Button>
                 
             </div>
         </div>
