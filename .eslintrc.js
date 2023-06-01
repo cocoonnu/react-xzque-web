@@ -51,5 +51,6 @@ module.exports = {
 
         // TS 报错忽略
         '@typescript-eslint/no-var-requires': 0, // 允许使用requires
+        '@typescript-eslint/no-explicit-any': 0, // 允许使用any类型
     },
 }

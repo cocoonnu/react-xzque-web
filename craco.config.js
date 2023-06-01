@@ -6,5 +6,12 @@ module.exports = {
         alias: {
             '@': reslove('src'),
         }
-    }
+    },
+
+    devServer: {
+        port: 8000,
+        proxy: {
+            '/api': 'http://localhost:3001',
+        },
+    },    
 }
