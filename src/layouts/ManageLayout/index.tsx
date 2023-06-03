@@ -1,25 +1,39 @@
 import React, { FC } from 'react'
 import styles from './index.module.scss'
-import { Button, Space } from 'antd'
+import { Button, Space, message } from 'antd'
+import { useRequest } from 'ahooks'
+import { createQuestionApi } from '@/services/question'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { PlusOutlined, BarsOutlined, StarOutlined, DeleteOutlined } from '@ant-design/icons'
 
 const ManageLayout: FC = () => {
     const nav = useNavigate()
     const { pathname } = useLocation()
+    const { loading, run: createQuestion  } = useRequest(createQuestionApi, {
+        manual: true,
+
+        onSuccess: () => {
+            nav('/question')
+            message.success('新建问卷成功')
+        },
+
+        onError: (err) => {
+            console.log(err)
+        }
+    })
     
     return (
         <div className={ styles.container }>
             <div className={ styles['container-content'] }>
 
-                {/* 左边的按钮选项 */}
                 <Space direction='vertical'>
                     <Button 
                         size='large'
                         type='primary'
                         icon={<PlusOutlined />}
-                        onClick={() => { nav('/question') }}
+                        onClick={() => createQuestion()}
                         style={{ marginBottom: '40px'}}
+                        disabled={ loading ? true : false }
                     >
                         新建问卷
                     </Button>
@@ -53,7 +67,7 @@ const ManageLayout: FC = () => {
 
                 </Space>
 
-                {/* 右边的问卷管理页面 */}
+                {/* 问卷管理页面 */}
                 <div className={styles['right-list']}>
                     <Outlet />
                 </div>

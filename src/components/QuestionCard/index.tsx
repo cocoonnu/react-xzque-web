@@ -3,17 +3,10 @@ import { Divider, Tag } from 'antd'
 import { StarTwoTone } from '@ant-design/icons'
 import styles from './index.module.scss'
 import CardOption from './components/CardOption'
+import type { QuestionCardType } from '@/types'
 
-type PropsType = {
-    _id: string
-    title: string
-    isStar: boolean
-    isPublished: boolean
-    answerCount: number
-    createdAt: string
-}
 
-const QuestionCard: FC<PropsType> = (props: PropsType) => {
+const QuestionCard: FC<QuestionCardType> = (props: QuestionCardType) => {
     const { title, isStar, isPublished, answerCount, createdAt }  = props
 
     return (

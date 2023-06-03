@@ -1,36 +1,30 @@
-import React, { FC, useState } from 'react'
-import { Empty } from 'antd'
+import React, { FC } from 'react'
+import { Empty, Spin } from 'antd'
+import { useRequest } from 'ahooks'
 import styles from '../common.module.scss'
 import QuestionCard from '@/components/QuestionCard'
 import ListSearch from '@/components/ListSearch'
+import { getQuestionPageListApi } from '@/services/question'
+import type { QuestionCardType } from '@/types'
 
 const List: FC = () => {
-    const [questionList] = useState([
-        {
-            _id: 'q1',
-            title: '问卷1',
-            isPublished: false,
-            isStar: false,
-            answerCount: 5,
-            createdAt: '3月10日 13:23'            
-        },
-        // {
-        //     _id: 'q2',
-        //     title: '问卷2',
-        //     isPublished: true,
-        //     isStar: false,
-        //     answerCount: 5,
-        //     createdAt: '3月10日 13:23'
-        // },
-        // {
-        //     _id: 'q3',
-        //     title: '问卷3',
-        //     isPublished: false,
-        //     isStar: true,
-        //     answerCount: 5,
-        //     createdAt: '3月10日 13:23'
-        // },
-    ])
+    const { data: questionData, loading } = useRequest(getQuestionPageListApi)
+    const { list: questionList = [] } = questionData || { list: [] }
+
+
+    const randerQuestionList = () => {
+        return <>
+            {
+                questionList.map((item: QuestionCardType) => {
+                    return <QuestionCard {...item} key={item._id} />
+                })                
+            }
+        </>
+    }
+
+    const randerEmpty = () => {
+        return <Empty description='当前暂无问卷数据' style={{ marginTop: 100 }} />
+    }
 
     return (
         <div className={ styles.container }>
@@ -43,13 +37,13 @@ const List: FC = () => {
 
 
             <div className={ styles.body }>
-                {questionList.length < 2 && 
-                    <Empty description='当前暂无问卷数据' style={{marginTop: 100}}/>
+                {
+                    loading ? <Spin size='large' /> : <>
+                        {
+                            questionList.length > 0 ? randerQuestionList() : randerEmpty()
+                        }
+                    </>
                 }
-
-                {questionList.length > 2 && questionList.map(item => {
-                    return <QuestionCard {...item} key={item._id}/>
-                })}
             </div>
 
 

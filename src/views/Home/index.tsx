@@ -1,25 +1,15 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Typography } from 'antd'
 import styles from './index.module.scss'
-import { createQuestionApi } from '@/services/question'
 const { Title, Paragraph } = Typography
 
 const Home: FC = () => {
     const nav = useNavigate()
 
     const btnClick = () => {
-        nav('/login')
+        nav('/manage')
     }
-
-    useEffect(() => {
-        async function createQuestion() {
-            const res = await createQuestionApi()
-            console.log(res)
-        }
-        
-        createQuestion()
-    }, [])
 
     return (
         <div className={styles.container}>
