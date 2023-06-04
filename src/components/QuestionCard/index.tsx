@@ -16,8 +16,8 @@ const QuestionCard: FC<QuestionCardType> = (props: QuestionCardType) => {
 
                 <div className={ styles['top-info-left'] }>
 
-                    <span className={ styles.title }>{ title }</span>
                     {isStar && <StarTwoTone />}
+                    <span className={ styles.title }>{ title }</span>
                     
                 </div>
 

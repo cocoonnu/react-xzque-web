@@ -18,11 +18,11 @@ const ListSearch: FC = () => {
     }, [searchParams])
     
 
-    // 搜索时改变页面url传入search参数
+    // 搜索时改变页面url：修改keyword字段
     const onSearch = () => {
         nav({
             pathname,
-            search: `${LIST_SEARCH_KEY}=${searchValue}`       
+            search: `${LIST_SEARCH_KEY}=${searchValue}`
         })
     }
     

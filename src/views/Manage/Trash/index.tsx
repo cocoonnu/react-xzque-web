@@ -1,38 +1,19 @@
 import React, { FC, useState } from 'react'
-import { Empty, Tag, Table, Space, Button } from 'antd'
+import { Empty, Tag, Table, Space, Button, Spin } from 'antd'
 import styles from '../common.module.scss'
 import ListSearch from '@/components/ListSearch'
+import useLoadQueList from '@/hooks/useLoadQueList'
+import ListPagination from '@/components/ListPagination'
 
 
 const Trash: FC = () => {
+    const { data: questionData, loading } = useLoadQueList({ isDeleted: true })
+    const { list: questionList = [] } = questionData || { list: [] }
+    const { total = 0 } = questionData || { total: 0 }
+
+
     const [selectedIds, setSelectedIds] = useState<string[]>([])
 
-    const [questionList] = useState([
-        {
-            _id: 'q1',
-            title: '问卷1',
-            isPublished: false,
-            isStar: false,
-            answerCount: 5,
-            createdAt: '3月10日 13:23'
-        },
-        {
-            _id: 'q2',
-            title: '问卷2',
-            isPublished: true,
-            isStar: false,
-            answerCount: 5,
-            createdAt: '3月10日 13:23'
-        },
-        {
-            _id: 'q3',
-            title: '问卷3',
-            isPublished: false,
-            isStar: true,
-            answerCount: 5,
-            createdAt: '3月10日 13:23'
-        },
-    ])
 
     const tableColumns = [
         {
@@ -60,28 +41,33 @@ const Trash: FC = () => {
         setSelectedIds(selectedRowKeys)
     }
 
+    const randerQuestionTable = () => {
+        const TableEl = (<>
+            <Space style={{ alignSelf: 'flex-start' }}>
+                <Button type='primary' disabled={selectedIds.length == 0}>
+                    恢复
+                </Button>
 
-    // 表格渲染
-    const TableEl = (<>
-        <Space style={{ alignSelf: 'flex-start' }}>
-            <Button type='primary' disabled={selectedIds.length == 0}>
-                恢复
-            </Button>
+                <Button danger disabled={selectedIds.length == 0} >
+                    彻底删除
+                </Button>
+            </Space>
 
-            <Button danger disabled={selectedIds.length == 0} >
-                彻底删除
-            </Button>
-        </Space>
+            <Table
+                rowKey='_id'
+                pagination={false}
+                columns={tableColumns}
+                dataSource={questionList}
+                style={{ width: '100%' }}
+                rowSelection={{ onChange: onSelectedChange }}
+            />
+        </>)
 
-        <Table
-            rowKey='_id'
-            pagination={false}
-            columns={tableColumns}
-            dataSource={questionList}
-            style={{ width: '100%' }}
-            rowSelection={{ onChange: onSelectedChange }}
-        />
-    </>)
+        const randerEmpty = (<Empty description='当前暂无回收站数据' style={{ marginTop: 100 }} />)
+
+        return questionList.length > 0 ? TableEl : randerEmpty
+    }
+
 
     return (
         <div className={styles.container}>
@@ -93,14 +79,12 @@ const Trash: FC = () => {
             </div>
 
             <div className={styles.body}>
-                {questionList.length < 2 && 
-                    <Empty description='当前暂无回收站数据' style={{ marginTop: 100 }} />
-                }
-
-                {questionList.length > 2 && TableEl}
+                { loading ? <Spin size='large' /> : randerQuestionTable() }
             </div>
 
-            {/* <div className={ styles.footer }>分页器</div> */}
+            <div className={ styles.footer }>
+                { !loading && <ListPagination total={total} /> }
+            </div>
 
         </div>
     )

@@ -1,11 +1,32 @@
 import React, { FC } from 'react'
-// import { Empty } from 'antd'
+import { Empty, Spin } from 'antd'
 import styles from '../common.module.scss'
-// import QuestionCard from '@/components/QuestionCard'
+import QuestionCard from '@/components/QuestionCard'
 import ListSearch from '@/components/ListSearch'
+import useLoadQueList from '@/hooks/useLoadQueList'
+import ListPagination from '@/components/ListPagination'
 
 
 const Star: FC = () => {
+    // 初始化获取问卷列表
+    // 分页器和搜索框通过修改URL实现再一次执行异步函数获取
+    const { data: questionData, loading } = useLoadQueList({ isStar: true })
+    const { list: questionList = [] } = questionData || { list: [] }
+    const { total = 0 } = questionData || { total: 0 }
+
+
+    const randerQuestionCard = () => {
+        const randerQuestionList = () => {
+            return questionList.map((item) => {
+                return <QuestionCard {...item} key={item._id} />
+            })
+        }
+
+        const randerEmpty = (<Empty description='当前暂无星标问卷' style={{ marginTop: 100 }} />) 
+        
+        return questionList.length > 0 ? randerQuestionList() : randerEmpty
+    }
+
 
     return (
         <div className={styles.container}>
@@ -18,17 +39,13 @@ const Star: FC = () => {
 
 
             <div className={styles.body}>
-                {/* {questionList.length < 2 && 
-                    <Empty description='当前暂无星标问卷' style={{ marginTop: 100 }} />
-                }
-                
-                {questionList.length > 2 && questionList.map(item => {
-                    return <QuestionCard {...item} key={item._id} />
-                })} */}
+                { loading ? <Spin size='large' /> : randerQuestionCard() }
             </div>
 
 
-            {/* <div className={ styles.footer }>分页器</div> */}
+            <div className={ styles.footer }>
+                { !loading && <ListPagination total={total} /> }
+            </div>
 
         </div>
     )

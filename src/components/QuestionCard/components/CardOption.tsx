@@ -3,20 +3,10 @@ import { Button } from 'antd'
 import { LineChartOutlined, EditOutlined } from '@ant-design/icons'
 import { DeleteOutlined, CopyOutlined, StarOutlined } from '@ant-design/icons'
 import styles from './CardOption.module.scss'
-
-// hooks
+import type { QuestionCardType } from '@/types'
 import { showDeleteConfirm, showCopyConfirm } from '../hooks/ConfirmModal'
 
-type PropsType = {
-    _id: string
-    title: string
-    isStar: boolean
-    isPublished: boolean
-    answerCount: number
-    createdAt: string
-}
-
-const CardOption: FC<PropsType> = (props: PropsType) => {
+const CardOption: FC<QuestionCardType> = (props: QuestionCardType) => {
     const { isPublished, isStar } = props
 
     return (

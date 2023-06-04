@@ -17,16 +17,17 @@ module.exports = [
         }
     },
 
-    // 获取某页问卷列表
+    // 获取某页问卷列表（可通过搜索框关键词、是否星标、是否删除过滤）
     {
         url: '/api/question',
         method: 'get',
-        response() {
+        response(ctx) {
             return {
                 errno: 0,
                 data: {
-                    list: getQuestionList(),
-                    total: 100
+                    list: getQuestionList(ctx),
+                    total: 100,
+                    params: ctx.query
                 }
             }
         }
