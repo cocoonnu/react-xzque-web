@@ -79,7 +79,7 @@ const Trash: FC = () => {
             </div>
 
             <div className={styles.body}>
-                { loading ? <Spin size='large' /> : randerQuestionTable() }
+                { loading ? <Spin /> : randerQuestionTable() }
             </div>
 
             <div className={ styles.footer }>

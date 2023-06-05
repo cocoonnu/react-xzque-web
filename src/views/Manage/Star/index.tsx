@@ -39,7 +39,7 @@ const Star: FC = () => {
 
 
             <div className={styles.body}>
-                { loading ? <Spin size='large' /> : randerQuestionCard() }
+                { loading ? <Spin /> : randerQuestionCard() }
             </div>
 
 

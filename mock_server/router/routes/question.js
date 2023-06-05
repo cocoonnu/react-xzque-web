@@ -13,6 +13,8 @@ module.exports = [
                 data: {
                     id: Random.id()
                 }
+
+                // 错误返回格式 { errno: 404, msg: '新建问卷失败' }
             }
         }
     },
@@ -26,8 +28,37 @@ module.exports = [
                 errno: 0,
                 data: {
                     list: getQuestionList(ctx),
-                    total: 100,
+                    total: 50,
                     params: ctx.query
+                }
+            }
+
+            // 错误返回格式 { errno: 404, msg: '获取某页问卷列表失败' }
+        }
+    },
+
+    // 更新问卷（设置标星或删除）
+    {
+        url: '/api/question:id',
+        method: 'patch',
+        response() {
+            return {
+                errno: 0,
+            }
+
+            // 错误返回格式 { errno: 404, msg: '更新问卷失败' }
+        }
+    },
+
+    // 复制问卷: 生成一个新id，但是问卷内容一致
+    {
+        url: '/api/question/duplicate/:id',
+        method: 'post',
+        response() {
+            return {
+                errno: 0,
+                data: {
+                    id: Random.id()
                 }
             }
         }
