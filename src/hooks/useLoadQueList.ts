@@ -27,11 +27,11 @@ const useLoadQueList = (loadOption: Partial<LoadOptionType>) => {
     // 合并过滤项
     const SearchOption = { isStar, isDeleted, keyword, page, pageSize }
 
-    const { loading, data } = useRequest(() => getQuestionPageListApi(SearchOption), {
+    const { loading, data, refresh } = useRequest(() => getQuestionPageListApi(SearchOption), {
         refreshDeps: [searchParams]
     })
 
-    return { loading, data }
+    return { loading, data, refresh }
 }
 
 export default useLoadQueList

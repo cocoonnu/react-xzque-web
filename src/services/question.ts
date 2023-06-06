@@ -72,3 +72,13 @@ export async function duplicateQuestionApi(id: string) {
     if (res.errno === 0) return res.data as ResDataType
     return Promise.reject({} as ResDataType)
 }
+
+// 彻底删除问卷
+export async function deleteQuestionApi(ids: string[]) {
+    const url = '/api/question'
+    // 将需要删除的id数组放入请求体的data属性中
+    const res = await axiosInstance.delete(url, {data: {ids}}) as ResType
+
+    if (res.errno === 0) return Promise.resolve(true)
+    return Promise.reject(false)
+}

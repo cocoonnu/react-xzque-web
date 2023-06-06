@@ -39,13 +39,12 @@ module.exports = [
 
     // 更新问卷（设置标星或删除）
     {
-        url: '/api/question:id',
+        url: '/api/question/:id',
         method: 'patch',
         response() {
             return {
                 errno: 0,
             }
-
             // 错误返回格式 { errno: 404, msg: '更新问卷失败' }
         }
     },
@@ -64,4 +63,14 @@ module.exports = [
         }
     },
 
+    // 批量彻底删除
+    {
+        url: '/api/question',
+        method: 'delete',
+        response() {
+            return {
+                errno: 0
+            }
+        }
+    }
 ]
