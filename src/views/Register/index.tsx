@@ -1,18 +1,36 @@
 import React, { FC } from 'react'
 import styles from './index.module.scss'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { registerUserApi } from '@/services/users'
+import { useRequest } from 'ahooks'
 import { UserAddOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Space, Typography } from 'antd'
+import { Button, Form, Input, Space, Typography, message } from 'antd'
 import { usernameRulse, passwordRules, confirmPasswordRules } from './hooks/formRules'
 
+type formValueType = {
+    username: string
+    password: string
+    confirmPassword: string
+    nickname: string |undefined
+}
 
 const Register: FC = () => {
     const { Title } = Typography
     const [formRef] = Form.useForm()
+    const nav = useNavigate()
 
-    const onFinish = (values) => {
-        console.log(values)
-    }
+    const { run: registerUser, loading } = useRequest((formValue: formValueType) => {
+        const { username, password, nickname } = formValue
+        return registerUserApi({ username, password, nickname })
+    }, {
+        manual: true,
+        onSuccess() {
+            message.success('注册成功')
+            nav('/login')
+        }
+    })
+
+    const onFinish = (values: formValueType) => registerUser(values)
 
     return (
         <div className={styles.register}>
@@ -63,7 +81,7 @@ const Register: FC = () => {
                     </Form.Item>
 
                     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                        <Button type='primary' htmlType='submit'>
+                        <Button type='primary' htmlType='submit' disabled={loading}>
                             注册
                         </Button>
 

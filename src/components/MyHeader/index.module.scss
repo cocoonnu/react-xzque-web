@@ -3,6 +3,7 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     .logo {
         display: flex;
@@ -26,5 +27,15 @@
             color: #fff;
             cursor: pointer;
         }
+    }
+
+    .user {
+        height: 35px;
+        color: #fff; 
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

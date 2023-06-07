@@ -8,6 +8,10 @@ const axiosInstance = axios.create({
 
 // 请求拦截器
 axiosInstance.interceptors.request.use(function(config) {
+    
+    // 设置 TOKEN 请求头 JWT 固定格式
+    const token = localStorage.getItem('TOKEN') || ''
+    config.headers['Authorization'] = `Bearer ${token}`
     return config
 })
 
@@ -16,8 +20,10 @@ axiosInstance.interceptors.response.use(function(response) {
 
     // 统一输出错误提示
     const res: any = response.data || {}
+    
     if (res.errno !== 0) {
         if (res.msg) message.error(res.msg)
+        else message.error('未知错误，请稍后重试')
     }
 
     // 直接返回响应体内容
