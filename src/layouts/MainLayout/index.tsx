@@ -1,12 +1,19 @@
 import React, { FC } from 'react'
-import { Layout } from 'antd'
+import { Layout, Spin } from 'antd'
 import MyHeader from '@/components/MyHeader'
 import { Outlet } from 'react-router-dom'
 import styles from './index.module.scss'
+import useLoadUserInfo from '@/hooks/useLoadUserInfo'
 
 const { Header, Footer, Content } = Layout
 
 const MainLayout: FC = () => {
+    const { userInfoLoading } = useLoadUserInfo()
+
+    const spinContainer = () => {
+        return (<Spin className={styles.spin} size='large' />)
+    }
+
     return (
         <Layout className={ styles.layout }>
             <Header className={ styles.header }>
@@ -14,7 +21,8 @@ const MainLayout: FC = () => {
             </Header>
 
             <Content className={ styles.main }>
-                <Outlet />
+                {/* <Outlet /> */}
+                {userInfoLoading ? spinContainer() : <Outlet />}
             </Content>
 
             <Footer className={ styles.footer }>

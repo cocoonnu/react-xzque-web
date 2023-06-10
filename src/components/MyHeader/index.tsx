@@ -1,26 +1,32 @@
 import React, { FC } from 'react'
+import { Image, Button } from 'antd'
 import styles from './index.module.scss'
 import { useNavigate } from 'react-router-dom'
-import { useRequest } from 'ahooks'
-import { getUserInfoApi } from '@/services/users'
-import { Image, Button } from 'antd'
+import { useAppDispatch } from '@/store'
+import { clearUserState } from '@/store/modules/userReducer'
+import useGetUserInfo from '@/hooks/useGetUserInfo'
 
 
 const MyHeader: FC = () => {
     const nav = useNavigate()
-    const { data: userInfo } = useRequest(getUserInfoApi)
-    const { nickname = '' } = userInfo || { nickname: '' }
+    const dispatch = useAppDispatch()
+    const { userState, isLogin } = useGetUserInfo()
 
     const logout = () => {
         localStorage.removeItem('TOKEN')
+        dispatch(clearUserState())
         nav('/login')
     }
 
     const userContainer = (
         <div className={styles.user}>
-            <span>{nickname}</span>
+            <span>{userState.nickname}</span>
             <Button type='link' onClick={logout}>登出</Button>
         </div>
+    )
+
+    const loginContainer = (
+        <div className={styles.user} onClick={() => nav('/login')}>登录/注册</div>
     )
 
     return (
@@ -30,11 +36,11 @@ const MyHeader: FC = () => {
 
                 <span 
                     className={ styles['logo-text'] }
-                    onClick={() => { nav('/') }}
+                    onClick={() => nav('/')}
                 >小智问卷</span>
             </div>
 
-            {nickname ? userContainer : <div className={styles.user}>登录/注册</div>}    
+            {isLogin ? userContainer : loginContainer}    
         </div>
     )
 }

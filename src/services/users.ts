@@ -48,7 +48,7 @@ export async function getUserInfoApi() {
     const res = await axiosInstance.get(url) as ResType
 
     type ResDataType = {
-        usename: string
+        username: string
         nickname: string
     }
 

@@ -11,7 +11,9 @@ axiosInstance.interceptors.request.use(function(config) {
     
     // 设置 TOKEN 请求头 JWT 固定格式
     const token = localStorage.getItem('TOKEN') || ''
-    config.headers['Authorization'] = `Bearer ${token}`
+    // config.headers['Authorization'] = `Bearer ${token}`
+    if (token) config.headers['Authorization'] = token
+    
     return config
 })
 

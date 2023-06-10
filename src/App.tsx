@@ -11,6 +11,7 @@ const antdTheme = {
 }
 
 const App: FC = () => {
+
     return (
         <ConfigProvider locale={zhCN} theme={antdTheme}>
             <RouterProvider router={router}></RouterProvider>

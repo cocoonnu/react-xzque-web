@@ -47,7 +47,7 @@ const Trash: FC = () => {
 
     // 时刻更新内部维护的问卷数组
     useEffect(() => {
-        setQuestionListState(questionList)
+        if (questionList.length) setQuestionListState(questionList)
     }, [questionList])
 
 

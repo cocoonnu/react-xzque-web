@@ -6,16 +6,17 @@ module.exports = [
     {
         url: '/api/user/info',
         method: 'get',
-        response() {
-            return {
-                errno: 0,
-                data: {
-                    username: Random.title(),
-                    // nickname: Random.cname()
+        response(ctx) {
+            if (ctx.request.header.authorization) {
+                return {
+                    errno: 0,
+                    data: {
+                        username: Random.title(),
+                        nickname: Random.name()
+                    }
                 }
-
-                // errno: 100,
-                // msg: '获取用户信息失败'
+            } else {
+                return { errno: 404, msg: '用户未登录' }
             }
         }
     },
