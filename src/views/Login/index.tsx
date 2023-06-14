@@ -1,14 +1,13 @@
 import React, { FC, useEffect } from 'react'
 import styles from './index.module.scss'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
-import { Button, Checkbox, Form, Input, Space, Typography, message } from 'antd'
+import { Button, Checkbox, Form, Input, Space, Typography } from 'antd'
 import { getUser, deleteUser, rememberUser } from './hooks/useRemember'
 import { usernameRulse, passwordRules } from './hooks/formRules'
-import { loginUserApi } from '@/services/users'
-import { useRequest } from 'ahooks'
+import useLoginUser from './hooks/useLoginUser'
 
-type formValueType = {
+export type formValueType = {
     username: string
     password: string
     remember: boolean
@@ -17,19 +16,7 @@ type formValueType = {
 const Login: FC = () => {
     const { Title } = Typography
     const [formRef] = Form.useForm()
-    const nav = useNavigate()
-
-    const { run: loginUser, loading } = useRequest((formValue: formValueType) => {
-        const { username, password } = formValue
-        return loginUserApi({ username, password })
-    }, {
-        manual: true,
-        onSuccess(res: {token: string}) {
-            localStorage.setItem('TOKEN', res.token || '')
-            message.success('登录成功')
-            nav('/manage')
-        }
-    })
+    const { loginUser, loading } = useLoginUser()
 
     useEffect(() => {
         formRef.setFieldsValue(getUser())

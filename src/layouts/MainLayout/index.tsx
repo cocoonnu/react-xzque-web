@@ -4,11 +4,13 @@ import MyHeader from '@/components/MyHeader'
 import { Outlet } from 'react-router-dom'
 import styles from './index.module.scss'
 import useLoadUserInfo from '@/hooks/useLoadUserInfo'
+import useBeforePageNav from '@/hooks/useBeforePageNav'
 
 const { Header, Footer, Content } = Layout
 
 const MainLayout: FC = () => {
     const { userInfoLoading } = useLoadUserInfo()
+    useBeforePageNav(userInfoLoading)
 
     const spinContainer = () => {
         return (<Spin className={styles.spin} size='large' />)

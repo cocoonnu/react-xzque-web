@@ -15,7 +15,7 @@ const useLoadUserInfo = () => {
 
     const [userInfoLoading, setUserInfoLoading] = useState(true)
 
-    const { run: loadUserInfo } = useRequest(getUserInfoApi, {
+    const { run: loadUserInfo, runAsync: loadUserInfoAsync } = useRequest(getUserInfoApi, {
         manual: true,
         onSuccess(data) {
             if (data) dispatch(setUserState(data))
@@ -36,7 +36,7 @@ const useLoadUserInfo = () => {
         setUserInfoLoading(false)
     }, [pathname, isLogin])
 
-    return { userInfoLoading, loadUserInfo }
+    return { userInfoLoading, loadUserInfo, loadUserInfoAsync }
 }
 
 export default useLoadUserInfo
