@@ -23,7 +23,6 @@ const MainLayout: FC = () => {
             </Header>
 
             <Content className={ styles.main }>
-                {/* <Outlet /> */}
                 {userInfoLoading ? spinContainer() : <Outlet />}
             </Content>
 

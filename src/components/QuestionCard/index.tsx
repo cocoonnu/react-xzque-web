@@ -45,6 +45,7 @@ const QuestionCard: FC<QuestionCardType> = (props: QuestionCardType) => {
                     icon={<EditOutlined />}
                     type='text'
                     size='small'
+                    onClick={() => nav(`/question/edit/${_id}`)}
                 >编辑问卷</Button>
 
                 <Button

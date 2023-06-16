@@ -12,13 +12,11 @@ const ManageLayout: FC = () => {
     const { loading, run: createQuestion  } = useRequest(createQuestionApi, {
         manual: true,
 
-        onSuccess: () => {
-            nav('/question')
-            message.success('新建问卷成功')
-        },
-
-        onError: (err) => {
-            console.log(err)
+        onSuccess: (data) => {
+            if (data.id) {
+                nav(`/question/edit/${data.id}`)
+                message.success('新建问卷成功')
+            }
         }
     })
     

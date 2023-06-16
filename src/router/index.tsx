@@ -1,3 +1,4 @@
+import React from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import MainLayout from '@/layouts/MainLayout'
 import Home from '@/views/Home'
@@ -11,7 +12,6 @@ import Trash from '@/views/Manage/Trash'
 import QuestionLayout from '@/layouts/QuestionLayout'
 import Edit from '@/views/Question/Edit'
 import Stat from '@/views/Question/Stat'
-import React from 'react'
 
 export default createBrowserRouter([
     {

@@ -1,0 +1,15 @@
+.layout {
+    width: 100vw;
+    height: 100vh;
+    min-width: 1200px;
+    min-height: 850px;
+    overflow: hidden;
+    background-color: #f0f2f5;
+
+    .spin {
+        width: 100%;
+        display: grid;
+        place-items: center;
+        margin-top: 50px;
+    }
+}

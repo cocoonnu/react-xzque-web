@@ -9,8 +9,8 @@ import type { formValueType } from '@/views/Login'
 
 const useLoginUser = () => {
     const nav = useNavigate()
-    const { loadUserInfoAsync } = useLoadUserInfo()
     const dispatch = useAppDispatch()
+    const { loadUserInfoAsync } = useLoadUserInfo()
 
     const { run: loginUser, loading } = useRequest((formValue: formValueType) => {
         const { username, password } = formValue
