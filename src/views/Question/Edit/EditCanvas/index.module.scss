@@ -1,0 +1,19 @@
+.edit-canvas {
+    width: 100%;
+    height: fit-content;
+
+    .component-wrapper {
+        margin: 12px;
+        padding: 12px;
+        border-radius: 3px;
+        border: 1px solid #fff;
+    
+        .component {
+            pointer-events: none;
+        }
+
+        &:hover {
+            border-color: #d9d9d9;
+        }
+    }
+}

@@ -7,7 +7,7 @@ import { getQuestionPageListApi } from '@/services/question'
 import styles from '../common.module.scss'
 import ListSearch from '@/components/ListSearch'
 import { LIST_SEARCH_KEY, LIST_PAGE_SIZE } from '@/constant'
-import { QuestionCardType } from '@/types'
+import { QuestionCardType } from '@/components/QuestionCard/interface'
 
 
 const List: FC = () => {

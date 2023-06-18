@@ -1,18 +1,21 @@
 import React, { FC } from 'react'
-import { useParams } from 'react-router-dom'
 import styles from './index.module.scss'
+import EditCanvas from './EditCanvas'
 
 const Edit: FC = () => {
-    const { id } = useParams()
 
     return (
         <div className={ styles.edit }>
-            <div className={ styles.header }>header</div>
+            <header className={ styles.header }>header</header>
 
-            <div className={styles.content}>
-                <div className={ styles.left }></div>
-                <div className={ styles.main }>{id}</div>
-                <div className={ styles.right }></div>
+            <div className={ styles['edit-body'] }>
+                <div className={styles.content}>
+                    <div className={ styles.left }></div>
+
+                    <div className={styles.main}><EditCanvas/></div>
+
+                    <div className={ styles.right }></div>
+                </div>
             </div>
         </div>
     )

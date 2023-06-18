@@ -6,7 +6,6 @@ import { useAppDispatch } from '@/store'
 import { clearUserState } from '@/store/modules/userReducer'
 import useGetUserInfo from '@/hooks/useGetUserInfo'
 
-
 const MyHeader: FC = () => {
     const nav = useNavigate()
     const dispatch = useAppDispatch()
@@ -16,8 +15,9 @@ const MyHeader: FC = () => {
         localStorage.removeItem('TOKEN')
         dispatch(clearUserState())
         nav('/login')
-    }
+    } 
 
+    
     const userContainer = (
         <div className={styles.user}>
             <span>{userState.nickname}</span>

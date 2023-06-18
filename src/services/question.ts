@@ -1,5 +1,5 @@
 import axiosInstance from '@/services/axiosInstance'
-import { QuestionCardType } from '@/types'
+import { QuestionCardType } from '@/components/QuestionCard/interface'
 
 type ResType = {
     errno: number

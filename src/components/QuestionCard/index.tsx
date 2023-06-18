@@ -5,7 +5,7 @@ import { StarTwoTone } from '@ant-design/icons'
 import styles from './index.module.scss'
 import { LineChartOutlined, EditOutlined } from '@ant-design/icons'
 import { DeleteOutlined, CopyOutlined, StarOutlined } from '@ant-design/icons'
-import type { QuestionCardType } from '@/types'
+import type { QuestionCardType } from '@/components/QuestionCard/interface'
 import { useRequest } from 'ahooks'
 import { duplicateQuestionApi } from '@/services/question'
 import useStartQuestion from './hooks/useStartQuestion'
@@ -35,9 +35,8 @@ const QuestionCard: FC<QuestionCardType> = (props: QuestionCardType) => {
             }
         }
     )
-
-
-    const randerCardOption = (
+    
+    const renderCardOption = (
         <div className={styles['card-option']}>
 
             <div className={styles['option-item']}>
@@ -113,7 +112,7 @@ const QuestionCard: FC<QuestionCardType> = (props: QuestionCardType) => {
 
             <Divider style={{ margin: '12px 0' }} />
 
-            { randerCardOption }
+            { renderCardOption }
         </div>
     )
 }
