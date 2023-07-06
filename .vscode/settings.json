@@ -10,6 +10,10 @@
     // 单词拼写检查忽略区
     "cSpell.words": [
         "ahooks",
-        "antd"
-    ]
+        "antd",
+        "persistor",
+        "reduxjs"
+    ],
+    "prettier.enable": false,
+    "prettier.endOfLine": "crlf"
 }

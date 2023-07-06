@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
-import useLoadUserInfo from '@/hooks/useLoadUserInfo'
-import useBeforePageNav from '@/hooks/useBeforePageNav'
+import { Spin } from 'antd'
 import styles from './index.module.scss'
 import { Outlet } from 'react-router-dom'
-import { Spin } from 'antd'
+import useLoadUserInfo from '@/hooks/useLoadUserInfo'
+import useBeforePageNav from '@/hooks/useBeforePageNav'
 
 const QuestionLayout: FC = () => {
     const { userInfoLoading } = useLoadUserInfo()
@@ -15,7 +15,6 @@ const QuestionLayout: FC = () => {
 
     return (
         <div className={ styles.layout }>
-            {/* {spinContainer()} */}
             {userInfoLoading ? spinContainer() : <Outlet />}
         </div>
     )

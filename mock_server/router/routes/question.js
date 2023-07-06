@@ -1,8 +1,30 @@
 const Mock = require('mockjs')
-const getQuestionList = require('../data/getQuestionList')
 const Random = Mock.Random
+const getQuestionList = require('../data/getQuestionList')
+const getComponentList = require('../data/getComponentList')
 
 module.exports = [
+    // 获取某问卷详细信息
+    {
+        url: '/api/question/:id',
+        method: 'get',
+        response() {
+            return {
+                errno: 0,
+                data: {
+                    id: Random.id(),
+                    title: Random.ctitle(),
+                    desc: '问卷描述',
+                    js: '',
+                    css: '',
+                    isDeleted: false,
+                    isPublished: true,
+                    componentList: getComponentList()
+                }
+            }
+        }
+    },
+
     // 新建问卷
     {
         url: '/api/question',

@@ -20,6 +20,27 @@ type updateOptType = {
     isDelete?: boolean
 }
 
+// 获取某问卷详细信息
+export async function getQuestionDataApi(id: string) {
+    const url = `/api/question/${id}`
+    const res = await axiosInstance.get(url) as ResType
+
+    type ResDataType = {
+        id: string,
+        title: string,
+        desc: string,
+        js: string,
+        css: string,
+        isDeleted: boolean,
+        isPublished: boolean,
+        componentList: any[]
+    }
+
+    if (res.errno === 0) return res.data as ResDataType
+    return Promise.reject({} as ResDataType)
+}
+
+
 // 新建问卷
 export async function createQuestionApi() {
     const url = '/api/question'
@@ -72,6 +93,7 @@ export async function duplicateQuestionApi(id: string) {
     if (res.errno === 0) return res.data as ResDataType
     return Promise.reject({} as ResDataType)
 }
+
 
 // 彻底删除问卷
 export async function deleteQuestionApi(ids: string[]) {
