@@ -2,12 +2,12 @@ import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Typography } from 'antd'
 import styles from './index.module.scss'
-import { StoreStateType, useAppSelector } from '@/store'
+import { useAppSelector } from '@/store'
 const { Title, Paragraph } = Typography
 
 const Home: FC = () => {
     const nav = useNavigate()
-    const userState = useAppSelector((state: StoreStateType) => state.user)
+    const userState = useAppSelector(state => state.user)
     const btnName = userState.nickname ? '开始使用' : '立即登录'
 
     const btnClick = () => {

@@ -1,16 +1,23 @@
-import React, { FC } from 'react'
+import React, { FC, MouseEvent } from 'react'
 import { Spin } from 'antd'
+import classNames from 'classnames'
 import styles from './index.module.scss'
-import { useAppSelector } from '@/store'
+import { useAppSelector, useAppDispatch } from '@/store'
 import useLoadQueData from '@/hooks/useLoadQueData'
-import { ComponentInfoType } from '@/store/modules/componentsReducer'
+import { ComponentInfoType, changeSelectedId } from '@/store/modules/componentsReducer'
 import { getComponentConfig } from '@/components/QuestionComponents'
 
 const EditCanvas: FC = () => {
-    const { componentList } = useAppSelector(state => state.components)
+    const dispatch = useAppDispatch()
+    const { componentList, selectedId } = useAppSelector(state => state.components)
     const { loading: queDataLoading } = useLoadQueData()
 
-    const randerCompoent = (componentInfo: ComponentInfoType) => {
+    const clickComponent = (event: MouseEvent, componentInfo: ComponentInfoType) => {
+        event.stopPropagation()
+        dispatch(changeSelectedId(componentInfo.fe_id))
+    }
+
+    const randerComponent = (componentInfo: ComponentInfoType) => {
         const { type = '' } = componentInfo
         const componentConfig = getComponentConfig(type)
         if (componentConfig) {
@@ -19,18 +26,33 @@ const EditCanvas: FC = () => {
     }
 
     const randerComponentList = () => {
-        return componentList.map((componentInfo: ComponentInfoType) => (
-            <div className={styles['component-wrapper']} key={componentInfo.fe_id}>
-                <div className={styles.component}>
-                    {randerCompoent(componentInfo)}
+        return componentList.map((componentInfo: ComponentInfoType) => {
+            const componentWrapperClass = {
+                [styles['component-wrapper']]: true,
+                [styles['selected']]: selectedId === componentInfo.fe_id
+            }
+
+            return (
+                <div 
+                    key={componentInfo.fe_id}
+                    onClick={(event) => clickComponent(event, componentInfo)}
+                    className={classNames(componentWrapperClass)} 
+                >
+                    <div className={styles.component}>
+                        {randerComponent(componentInfo)}
+                    </div>
                 </div>
-            </div>
-        ))
+            )
+        })
+    }
+
+    const randerSpin = () => {
+        return <Spin style={{ marginTop: '15px', width: '100%' }} />
     }
 
     return (
         <div className={ styles['edit-canvas'] }>
-            {queDataLoading ? <Spin style={{ marginTop: '15px', width: '100%' }} /> : randerComponentList()} 
+            {queDataLoading ? randerSpin() : randerComponentList()} 
         </div>
     )
 }

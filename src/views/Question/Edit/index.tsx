@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import styles from './index.module.scss'
 import EditCanvas from './EditCanvas'
+import EditLeft from './EditLeft' 
 
 const Edit: FC = () => {
 
@@ -10,7 +11,7 @@ const Edit: FC = () => {
 
             <div className={ styles['edit-body'] }>
                 <div className={styles.content}>
-                    <div className={ styles.left }></div>
+                    <div className={styles.left}><EditLeft /></div>
 
                     <div className={styles.main}><EditCanvas/></div>
 

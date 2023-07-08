@@ -14,8 +14,12 @@ const useLoadQueData = () => {
     const { loading, run } = useRequest(getQuestionDataApi, {
         manual: true,
         onSuccess(data) {
+            // data: 某个问卷页面的详细信息数据
             const componentList = data?.componentList
-            if (componentList) dispatch(updateComponents({ componentList }))
+            if (componentList) {
+                const selectedId = componentList.length > 0 ? componentList[0].fe_id : '' 
+                dispatch(updateComponents({ componentList, selectedId }))
+            }
         },
     })
 
