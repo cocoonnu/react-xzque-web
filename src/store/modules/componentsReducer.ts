@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ComponentPropsType } from '@/components/QuestionComponents'
 
+// 单个渲染组件内部详细信息
 export type ComponentInfoType = {
   fe_id: string
   type: string
@@ -10,23 +11,24 @@ export type ComponentInfoType = {
   props: ComponentPropsType
 }
 
-export type ComponentsStateType = {
-  ComponentsList: ComponentInfoType[]
+// 仓库属性的类型
+export type ComponentStateType = {
+  componentList: ComponentInfoType[]
 }
 
-export type ComponentsActionType = PayloadAction<ComponentsStateType>
-
-const INIT_STATE: ComponentsStateType = {
-    ComponentsList: []
-}
+// 仓库action的类型
+export type ComponentActionType = PayloadAction<ComponentStateType>
 
 const ComponentsSlice = createSlice({
     name: 'components',
 
-    initialState: INIT_STATE,
+    initialState: {
+        componentList: []
+    },
 
     reducers: {
-        updateComponents: (state: ComponentsStateType, action: ComponentsActionType) => {
+        // 更新仓库属性
+        updateComponents: (state: ComponentStateType, action: ComponentActionType) => {
             return action.payload
         }
     },

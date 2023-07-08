@@ -1,4 +1,5 @@
 import axiosInstance from '@/services/axiosInstance'
+import { ComponentInfoType } from '@/store/modules/componentsReducer'
 import { QuestionCardType } from '@/components/QuestionCard/interface'
 
 type ResType = {
@@ -33,7 +34,7 @@ export async function getQuestionDataApi(id: string) {
         css: string,
         isDeleted: boolean,
         isPublished: boolean,
-        componentList: any[]
+        componentList: ComponentInfoType[]
     }
 
     if (res.errno === 0) return res.data as ResDataType

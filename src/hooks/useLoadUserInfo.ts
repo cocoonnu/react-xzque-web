@@ -32,7 +32,7 @@ const useLoadUserInfo = () => {
             loadUserInfo()
             return
         }
-        
+
         setUserInfoLoading(false)
     }, [pathname, isLogin])
 

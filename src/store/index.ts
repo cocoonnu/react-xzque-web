@@ -4,11 +4,11 @@ import { persistReducer, persistStore } from 'redux-persist'
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import userReducer, { UserStateType } from './modules/userReducer'
-import ComponentsSlice, { ComponentsStateType } from './modules/componentsReducer'
+import ComponentsSlice, { ComponentStateType } from './modules/componentsReducer'
 
 export type StoreStateType = {
     user: UserStateType
-    components: ComponentsStateType
+    components: ComponentStateType
 }
 
 const reducers = combineReducers({
