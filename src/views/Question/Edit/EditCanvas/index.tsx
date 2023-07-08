@@ -18,21 +18,19 @@ const EditCanvas: FC = () => {
         }
     }
 
-    if (queDataLoading) {
-        return <Spin style={{ marginTop: '10px', width: '100%' }}/>
+    const randerComponentList = () => {
+        return componentList.map((componentInfo: ComponentInfoType) => (
+            <div className={styles['component-wrapper']} key={componentInfo.fe_id}>
+                <div className={styles.component}>
+                    {randerCompoent(componentInfo)}
+                </div>
+            </div>
+        ))
     }
 
     return (
         <div className={ styles['edit-canvas'] }>
-            {
-                componentList.map((componentInfo: ComponentInfoType) => (
-                    <div className={styles['component-wrapper']} key={componentInfo.fe_id}>
-                        <div className={styles.component}>
-                            { randerCompoent(componentInfo) }
-                        </div>
-                    </div>                    
-                ))
-            }
+            {queDataLoading ? <Spin style={{ marginTop: '15px', width: '100%' }} /> : randerComponentList()} 
         </div>
     )
 }

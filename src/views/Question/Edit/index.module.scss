@@ -15,41 +15,28 @@
         padding: 24px;
         display: flex;
         justify-content: center;
+        align-items: center;
 
         .content {    
-            width: 100%;
+            width: fit-content;
             height: 100%;
-            max-width: 1600px;     
             max-height: 800px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
+            column-gap: 100px;
     
-            .left {
-                width: 295px;
+            .left, .right {
+                width: 300px;
                 height: 100%;
-                margin-left: 20px;
-                background-color: #fff;
-            }
-
-            .right {
-                width: 295px;
-                height: 100%;
-                margin-right: 20px;
                 background-color: #fff;
             }
     
             .main {
                 width: 400px;
-                height: 700px;
-                overflow: auto;
-                background-color: #fff;
-                box-shadow: 0 2px 10px #0000001f;
-
-                // 滚动条隐藏
-                &::-webkit-scrollbar {
-                    width: 0px;
-                }
+                height: 100%;
+                padding: 30px;
+                max-height: 700px;
             }
     
         }
