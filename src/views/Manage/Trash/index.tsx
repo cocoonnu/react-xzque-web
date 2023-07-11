@@ -128,22 +128,24 @@ const Trash: FC = () => {
         return questionListState.length > 0 ? TableEl : randerEmpty
     }
 
+    const randerPagination = () => {
+        if (questionList.length > 0) return <ListPagination total={total} />
+    }
 
     return (
         <div className={styles.container}>
 
             <div className={styles.header}>
                 <span className={styles.title}>回收站</span>
-
                 <ListSearch />
             </div>
 
             <div className={styles.body}>
-                { loading ? <Spin /> : randerQuestionTable() }
+                {loading ? <Spin /> : randerQuestionTable()}
             </div>
 
             <div className={ styles.footer }>
-                { !loading && <ListPagination total={total} /> }
+                {!loading && randerPagination() }
             </div>
 
         </div>

@@ -17,7 +17,7 @@ const useLoadQueData = () => {
             // data: 某个问卷页面的详细信息数据
             const componentList = data?.componentList
             if (componentList) {
-                const selectedId = componentList.length > 0 ? componentList[0].fe_id : '' 
+                const selectedId = ''
                 dispatch(updateComponents({ componentList, selectedId }))
             }
         },

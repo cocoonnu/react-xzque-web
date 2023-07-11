@@ -27,6 +27,9 @@ const Star: FC = () => {
         return questionList.length > 0 ? randerQuestionList() : randerEmpty
     }
 
+    const randerPagination = () => {
+        if (questionList.length > 0) return <ListPagination total={total} />
+    }
 
     return (
         <div className={styles.container}>
@@ -39,12 +42,12 @@ const Star: FC = () => {
 
 
             <div className={styles.body}>
-                { loading ? <Spin /> : randerQuestionCard() }
+                {loading ? <Spin /> : randerQuestionCard()}
             </div>
 
 
             <div className={ styles.footer }>
-                { !loading && <ListPagination total={total} /> }
+                {!loading && randerPagination()}
             </div>
 
         </div>

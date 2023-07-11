@@ -17,12 +17,18 @@ export type ComponentStateType = {
     componentList: ComponentInfoType[] // 问卷组件列表
 }
 
+// updataSelectedProps函数参数类型
+type updataSelectedPropsType = {
+    id: string
+    props: ComponentPropsType
+}
+
 const ComponentsSlice = createSlice({
     name: 'components',
 
     initialState: {
         selectedId: '',
-        componentList: []
+        componentList: [],
     },
 
     reducers: {
@@ -46,10 +52,27 @@ const ComponentsSlice = createSlice({
             } else {
                 state.componentList.push(action.payload)
             }
+        },
+
+        // 更新选中组件的props
+        updataSelectedProps: (state: ComponentStateType, action: PayloadAction<updataSelectedPropsType>) => {
+            const { id, props } = action.payload
+            for (let index = 0; index < state.componentList.length; index++) {
+                const component = state.componentList[index]
+                if (component.fe_id === id) {
+                    state.componentList[index].props = props
+                    break
+                }
+            }
         }
     },
 })
 
-export const { updateComponents, changeSelectedId, addComponent } = ComponentsSlice.actions
+export const { 
+    updateComponents, 
+    changeSelectedId, 
+    addComponent, 
+    updataSelectedProps 
+} = ComponentsSlice.actions
 export default ComponentsSlice.reducer
 

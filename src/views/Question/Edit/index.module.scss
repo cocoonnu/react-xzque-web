@@ -6,16 +6,15 @@
 
     .header {
         width: 100%;
-        min-height: 60px;
-        background-color: #fff;
     }
 
     .edit-body {
         flex: 1;
         padding: 24px;
         display: flex;
+        margin-top: 10px;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
 
         .content {    
             width: fit-content;
@@ -24,7 +23,7 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            column-gap: 100px;
+            column-gap: 150px;
     
             .left, .right {
                 width: 300px;
