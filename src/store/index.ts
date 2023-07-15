@@ -4,7 +4,7 @@ import { persistReducer, persistStore } from 'redux-persist'
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import userReducer, { UserStateType } from './modules/userReducer'
-import ComponentsSlice, { ComponentStateType } from './modules/componentsReducer'
+import ComponentsReducer, { ComponentStateType } from './modules/componentsReducer'
 
 export type StoreStateType = {
     user: UserStateType
@@ -13,14 +13,14 @@ export type StoreStateType = {
 
 const reducers = combineReducers({
     user: userReducer,
-    components: ComponentsSlice,
+    components: ComponentsReducer,
 })
 
 const persistConfig = {
     key: 'redux',
     storage: storage,
-    // whitelist: ['CollapsedReducer'],//白名单只保存CollapsedReducer
-    // blacklist:['CollapsedReducer'],//黑名单仅不保存CollapsedReducer
+    // whitelist: ['components'], // 白名单只保存某个仓库
+    blacklist: ['components'], // 黑名单仅不保存某个仓库
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)

@@ -26,7 +26,8 @@ const EditCanvas: FC = () => {
     }
 
     const randerComponentList = () => {
-        return componentList.map((componentInfo: ComponentInfoType) => {
+        const componentFilterList = componentList.filter(item => !item.isHidden)
+        return componentFilterList.map((componentInfo: ComponentInfoType) => {
             const componentWrapperClass = {
                 [styles['component-wrapper']]: true,
                 [styles['selected']]: selectedId === componentInfo.fe_id

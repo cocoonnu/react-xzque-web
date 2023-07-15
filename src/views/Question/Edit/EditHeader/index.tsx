@@ -3,6 +3,7 @@ import styles from './index.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { Button, Space } from 'antd'
 import { LeftOutlined } from '@ant-design/icons'
+import EditHeaderMain from './EditHeaderMain'
 
 const EditHeader: FC = () => {
     // const { Title } = Typography
@@ -20,7 +21,7 @@ const EditHeader: FC = () => {
                     </Space>
                 </div>
                 <div className={styles.main}>
-                    中间
+                    <EditHeaderMain />
                 </div>
                 <div className={styles.right}>
                     <Space>

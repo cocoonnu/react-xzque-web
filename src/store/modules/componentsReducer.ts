@@ -1,3 +1,5 @@
+import { message } from 'antd'
+import { getNewSelected } from '../utils/components.utils'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ComponentPropsType } from '@/components/QuestionComponents'
 
@@ -6,8 +8,8 @@ export type ComponentInfoType = {
     fe_id: string
     type: string
     title: string
-    isHidden?: boolean
-    isLocked?: boolean
+    isHidden: boolean
+    isLocked: boolean
     props: ComponentPropsType
 }
 
@@ -33,8 +35,10 @@ const ComponentsSlice = createSlice({
 
     reducers: {
         // 更新仓库属性
-        updateComponents: (state: ComponentStateType, action: PayloadAction<ComponentStateType>) => {
-            return action.payload
+        updateComponents: (state: ComponentStateType, action: PayloadAction<Partial<ComponentStateType>>) => {
+            Object.keys(action.payload).forEach(key => {
+                if (action.payload[key]) state[key] = action.payload[key]
+            })
         },
 
         // 更改选中的组件id
@@ -64,15 +68,68 @@ const ComponentsSlice = createSlice({
                     break
                 }
             }
+        },
+
+        // 删除画布中选中组件
+        deleteComponent: (state: ComponentStateType) => {
+            const selectedId = state.selectedId
+            if (!selectedId) {
+                message.info('当前未选中组件！')
+                return
+            }
+
+            const index = state.componentList.findIndex(c => c.fe_id === selectedId)
+            if (index !== -1) {
+                state.selectedId = getNewSelected(state, selectedId)
+                state.componentList.splice(index, 1)
+            } else {
+                message.error('删除组件失败！')
+            }
+        },
+
+        // 隐藏画布中选中组件
+        hiddenComponent: (state: ComponentStateType) => {
+            const selectedId = state.selectedId
+            if (!selectedId) {
+                message.info('当前未选中组件！')
+                return
+            }
+
+            const index = state.componentList.findIndex(c => c.fe_id === selectedId)
+            if (index !== -1) {
+                // 先更新选中组件id
+                state.selectedId = getNewSelected(state, selectedId)
+                // 再隐藏选中组件
+                state.componentList[index].isHidden = true
+            } else {
+                message.error('隐藏组件失败！')
+            }
+        },
+
+        // 锁定和解锁选中组件
+        lockedComponent: (state: ComponentStateType) => {
+            const selectedId = state.selectedId
+            if (!selectedId) {
+                message.info('当前未选中组件！')
+                return
+            }
+
+            const index = state.componentList.findIndex(c => c.fe_id === selectedId)
+            if (index !== -1) {
+                const isLocked = state.componentList[index].isLocked
+                state.componentList[index].isLocked = !isLocked
+            }
         }
     },
 })
 
-export const { 
-    updateComponents, 
-    changeSelectedId, 
-    addComponent, 
-    updataSelectedProps 
+export const {
+    updateComponents,
+    changeSelectedId,
+    addComponent,
+    updataSelectedProps,
+    deleteComponent,
+    hiddenComponent,
+    lockedComponent
 } = ComponentsSlice.actions
 export default ComponentsSlice.reducer
-
