@@ -1,21 +1,21 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Empty } from 'antd'
 import styles from './index.module.scss'
-import { useAppSelector, useAppDispatch } from '@/store'
+import { useAppDispatch } from '@/store'
+import useSelectedComponent from '@/hooks/useSelectedComponent'
 import { updataSelectedProps } from '@/store/modules/componentsReducer'
 import { ComponentConfigType, getComponentConfig, ComponentPropsType } from '@/components/QuestionComponents'
 
 const ComponentProp: FC = () => {
     const dispatch = useAppDispatch()
-    const { selectedId, componentList } = useAppSelector(state => state.components)
-    const selectComponent = componentList.find(c => c.fe_id === selectedId)
+    const { selectedId, selectedComponent, isLocked } = useSelectedComponent()
     const [componentConfig, setComponentConfig] = useState<ComponentConfigType>(null)
     
     useEffect(() => {
-        if (selectComponent) {
-            setComponentConfig(getComponentConfig(selectComponent.type))
+        if (selectedComponent) {
+            setComponentConfig(getComponentConfig(selectedComponent.type))
         }
-    }, [selectComponent])
+    }, [selectedComponent])
 
     const onChange = (props: ComponentPropsType) => {
         if (selectedId) dispatch(updataSelectedProps({id: selectedId, props}))
@@ -30,7 +30,7 @@ const ComponentProp: FC = () => {
         if (PropComponent) {
             return (
                 <div className={ styles.wrapper }>
-                    <PropComponent {...selectComponent.props} onChange={onChange} />
+                    <PropComponent {...selectedComponent.props} onChange={onChange} disabled={isLocked} />
                 </div>
             )
         } else {
@@ -39,7 +39,7 @@ const ComponentProp: FC = () => {
     }
     return (
         <div>
-            {selectComponent ? randerComponent() : randerEmpty()}
+            {selectedComponent ? randerComponent() : randerEmpty()}
         </div>
     )
 }

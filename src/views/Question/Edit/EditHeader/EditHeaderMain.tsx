@@ -3,20 +3,28 @@ import { Button, Space, Tooltip } from 'antd'
 import {
     DeleteOutlined,
     EyeInvisibleOutlined,
-    // LockOutlined,
-    // CopyOutlined,
-    // BlockOutlined,
+    LockOutlined,
+    CopyOutlined,
+    BlockOutlined,
     // UpOutlined,
     // DownOutlined,
     // UndoOutlined,
     // RedoOutlined,
 } from '@ant-design/icons'
 import { useAppDispatch } from '@/store'
-import { deleteComponent, hiddenComponent } from '@/store/modules/componentsReducer'
+import useSelectedComponent from '@/hooks/useSelectedComponent'
+import { 
+    deleteComponent, 
+    hiddenComponent, 
+    lockedComponent, 
+    cloneComponent, 
+    pasteComponent
+} from '@/store/modules/componentsReducer'
 
 
 const EditHeaderMain = () => {
     const dispatch = useAppDispatch()
+    const { isLocked, copyComponent } = useSelectedComponent()
 
     const handleDelete = () => {
         dispatch(deleteComponent())
@@ -24,6 +32,18 @@ const EditHeaderMain = () => {
 
     const handleHidden = () => {
         dispatch(hiddenComponent())       
+    }
+
+    const handleLocked = () => {
+        dispatch(lockedComponent())
+    }
+
+    const handleCopy = () => {
+        dispatch(cloneComponent())
+    }
+
+    const handlePaste = () => {
+        dispatch(pasteComponent())
     }
 
     return (
@@ -36,14 +56,27 @@ const EditHeaderMain = () => {
                 <Button shape='circle' icon={<EyeInvisibleOutlined />} onClick={handleHidden}></Button>
             </Tooltip>
 
-            {/* <Tooltip title='锁定'>
+            <Tooltip title='锁定'>
                 <Button
                     shape='circle'
                     icon={<LockOutlined />}
                     onClick={handleLocked}
                     type={isLocked ? 'primary' : 'default'}
                 ></Button>
-            </Tooltip> */}
+            </Tooltip>
+
+            <Tooltip title='复制'>
+                <Button shape='circle' icon={<CopyOutlined />} onClick={handleCopy}></Button>
+            </Tooltip>
+
+            <Tooltip title='粘贴'>
+                <Button
+                    shape='circle'
+                    icon={<BlockOutlined />}
+                    onClick={handlePaste}
+                    disabled={copyComponent == null}
+                ></Button>
+            </Tooltip>
         </Space>
     )
 }

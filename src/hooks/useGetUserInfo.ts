@@ -1,9 +1,9 @@
-import { StoreStateType, useAppSelector } from '@/store'
+import { useAppSelector } from '@/store'
 
 const useGetUserInfo = () => {
-    const userState = useAppSelector((state: StoreStateType) => state.user)
-    const isLogin = userState.nickname ? true : false  
-    
+    const userState = useAppSelector((state) => state.user)
+    const isLogin = userState.nickname ? true : false
+
     return { userState, isLogin }
 }
 

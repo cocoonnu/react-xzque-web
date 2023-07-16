@@ -1,4 +1,6 @@
 import { message } from 'antd'
+import { cloneDeep } from 'lodash'
+import { nanoid } from '@reduxjs/toolkit'
 import { getNewSelected } from '../utils/components.utils'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ComponentPropsType } from '@/components/QuestionComponents'
@@ -17,6 +19,7 @@ export type ComponentInfoType = {
 export type ComponentStateType = {
     selectedId: string // 当前选中的组件id
     componentList: ComponentInfoType[] // 问卷组件列表
+    copyComponent: ComponentInfoType // 当前复制的组件
 }
 
 // updataSelectedProps函数参数类型
@@ -31,13 +34,14 @@ const ComponentsSlice = createSlice({
     initialState: {
         selectedId: '',
         componentList: [],
+        copyComponent: null
     },
 
     reducers: {
         // 更新仓库属性
         updateComponents: (state: ComponentStateType, action: PayloadAction<Partial<ComponentStateType>>) => {
             Object.keys(action.payload).forEach(key => {
-                if (action.payload[key]) state[key] = action.payload[key]
+                state[key] = action.payload[key]
             })
         },
 
@@ -56,6 +60,7 @@ const ComponentsSlice = createSlice({
             } else {
                 state.componentList.push(action.payload)
             }
+            state.selectedId = action.payload.fe_id
         },
 
         // 更新选中组件的props
@@ -74,7 +79,7 @@ const ComponentsSlice = createSlice({
         deleteComponent: (state: ComponentStateType) => {
             const selectedId = state.selectedId
             if (!selectedId) {
-                message.info('当前未选中组件！')
+                message.info('当前未选中组件！', 1)
                 return
             }
 
@@ -91,7 +96,7 @@ const ComponentsSlice = createSlice({
         hiddenComponent: (state: ComponentStateType) => {
             const selectedId = state.selectedId
             if (!selectedId) {
-                message.info('当前未选中组件！')
+                message.info('当前未选中组件！', 1)
                 return
             }
 
@@ -110,7 +115,7 @@ const ComponentsSlice = createSlice({
         lockedComponent: (state: ComponentStateType) => {
             const selectedId = state.selectedId
             if (!selectedId) {
-                message.info('当前未选中组件！')
+                message.info('当前未选中组件！', 1)
                 return
             }
 
@@ -119,6 +124,38 @@ const ComponentsSlice = createSlice({
                 const isLocked = state.componentList[index].isLocked
                 state.componentList[index].isLocked = !isLocked
             }
+        },
+
+        // 复制选中组件
+        cloneComponent: (state: ComponentStateType) => {
+            const selectedId = state.selectedId
+            if (!selectedId) {
+                message.info('当前未选中组件！', 1)
+                return
+            }
+
+            const selectedComponent = state.componentList.find(c => c.fe_id === selectedId)
+            if (selectedComponent) {
+                state.copyComponent = cloneDeep(selectedComponent)
+                message.success('复制组件成功！', 1)
+            } else {
+                message.error('复制组件失败！')
+            }
+        },
+
+        // 粘贴已复制的组件
+        pasteComponent: (state: ComponentStateType) => {
+            state.copyComponent.fe_id = nanoid()
+
+            const selectedId = state.selectedId
+            if (selectedId) {
+                let index = state.componentList.findIndex(c => c.fe_id === selectedId)
+                index = index === -1 ? (state.componentList.length - 1) : index
+                state.componentList.splice(index + 1, 0, state.copyComponent)
+            } else {
+                state.componentList.push(state.copyComponent)
+            }
+            state.selectedId = state.copyComponent.fe_id
         }
     },
 })
@@ -130,6 +167,8 @@ export const {
     updataSelectedProps,
     deleteComponent,
     hiddenComponent,
-    lockedComponent
+    lockedComponent,
+    cloneComponent,
+    pasteComponent
 } = ComponentsSlice.actions
 export default ComponentsSlice.reducer

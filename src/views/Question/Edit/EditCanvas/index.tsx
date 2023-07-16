@@ -30,7 +30,8 @@ const EditCanvas: FC = () => {
         return componentFilterList.map((componentInfo: ComponentInfoType) => {
             const componentWrapperClass = {
                 [styles['component-wrapper']]: true,
-                [styles['selected']]: selectedId === componentInfo.fe_id
+                [styles['selected']]: selectedId === componentInfo.fe_id,
+                [styles['locked']]: componentInfo.isLocked
             }
 
             return (

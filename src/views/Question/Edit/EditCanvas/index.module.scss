@@ -10,7 +10,7 @@
         padding: 12px;
         border-radius: 3px;
         border: 1px solid #fff;
-    
+
         .component {
             pointer-events: none;
         }
@@ -22,5 +22,10 @@
 
     .selected {
         border-color: #1890ff !important;
+    }
+
+    .locked {
+        opacity: .5;
+        cursor: not-allowed;
     }
 }

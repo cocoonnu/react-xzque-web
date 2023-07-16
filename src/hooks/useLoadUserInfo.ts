@@ -40,4 +40,3 @@ const useLoadUserInfo = () => {
 }
 
 export default useLoadUserInfo
-// useLoadQueData
